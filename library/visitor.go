@@ -14,7 +14,7 @@ type Visitor interface {
 	VisitAudioBook(a *AudioBook)
 }
 
-func acceptAll[T Node] (v Visitor, nodes []T) {
+func acceptAll[T Node](v Visitor, nodes []T) {
 	for _, n := range nodes {
 		n.Accept(v)
 	}

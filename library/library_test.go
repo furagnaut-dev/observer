@@ -147,3 +147,22 @@ func TestJSONExportEmptyLibrary(t *testing.T) {
 		t.Fatalf("got %s, want %s", export.String(), want)
 	}
 }
+
+func TestSectionFinderFindsSectionByID(t *testing.T) {
+	finder := NewSectionFinder(2)
+	sampleLibrary().Accept(finder)
+
+	section, found := finder.Found()
+	if !found || section.Name != "Science" {
+		t.Fatalf("got found=%v, want section Science", found)
+	}
+}
+
+func TestSectionFinderUnknownID(t *testing.T) {
+	finder := NewSectionFinder(99)
+	sampleLibrary().Accept(finder)
+
+	if _, found := finder.Found(); found {
+		t.Fatalf("got found=true, want false")
+	}
+}

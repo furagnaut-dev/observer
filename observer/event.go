@@ -5,12 +5,13 @@ import "time"
 type EventType string
 
 const (
-	BookAvailable EventType = "BOOK_AVAILABLE"
-	BookBorrowed  EventType = "BOOK_BORROWED"
-	BookOverdue   EventType = "BOOK_OVERDUE"
-	PriceDropped  EventType = "PRICE_DROPPED"
-	SaleEnded     EventType = "SALE_ENDED"
-	SectionBusy   EventType = "SECTION_BUSY"
+	BookAvailable  EventType = "BOOK_AVAILABLE"
+	BookBorrowed   EventType = "BOOK_BORROWED"
+	BookOverdue    EventType = "BOOK_OVERDUE"
+	PriceDropped   EventType = "PRICE_DROPPED"
+	SaleEnded      EventType = "SALE_ENDED"
+	SectionBusy    EventType = "SECTION_BUSY"
+	InspectionDone EventType = "INSPECTION_DONE"
 )
 
 type Event struct {

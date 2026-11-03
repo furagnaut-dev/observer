@@ -165,3 +165,26 @@ func (j *JSONExport) VisitEBook(e *EBook) {
 func (j *JSONExport) VisitAudioBook(a *AudioBook) {
 	j.item(KindAudioBook, a.ID, a.Title, a.PriceCents, "minutes", a.Minutes)
 }
+
+type SectionFinder struct {
+	id      int
+	section *Section
+}
+
+func NewSectionFinder(id int) *SectionFinder {
+	return &SectionFinder{id: id}
+}
+
+func (f *SectionFinder) Found() (*Section, bool) { return f.section, f.section != nil }
+
+func (f *SectionFinder) VisitLibrary(l *Library) { acceptAll(f, l.Sections) }
+func (f *SectionFinder) VisitSection(s *Section) {
+	if s.ID == f.id {
+		f.section = s
+	}
+}
+func (f *SectionFinder) VisitShelf(s *Shelf)         {}
+func (f *SectionFinder) VisitBook(b *Book)           {}
+func (f *SectionFinder) VisitJournal(j *Journal)     {}
+func (f *SectionFinder) VisitEBook(e *EBook)         {}
+func (f *SectionFinder) VisitAudioBook(a *AudioBook) {}
